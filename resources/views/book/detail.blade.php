@@ -8,18 +8,18 @@
             
             <div class="box box-primary">
                 <div class="box-body box-profile">
-                    <img class="profile-user-img img-responsive img-circle" src="{{ asset( 'img/user4-128x128.jpg' ) }}" alt="{{ $user->user_name }}">
-                    <h3 class="profile-username text-center">{{ $user->user_name . ' ' . $user->user_lastName }}</h3>
-                    <p class="text-muted text-center">{{ $user->rol_name }}</p>
+                    <img class="profile-user-img img-responsive img-circle" src="{{ asset( 'img/' . $book->book_media ) }}" alt="{{ $book->user_name }}">
+                    <h3 class="profile-username text-center">{{ $book->user_name . ' ' . $book->user_lastName }}</h3>
+                    <p class="text-muted text-center">{{ $book->rol_name }}</p>
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
-                            <b>Libros Prestados</b> <a class="pull-right">{{ count( $book_lend ) }}</a>
+                            <b># Veces Prestado</b> <a class="pull-right">{{ count( $book_lend ) }}</a>
                         </li>
                     </ul>
 
                     @if( session( "us3r-rol" ) == 1 )
 				        
-				        <a href="{{ route( 'user-delete' ) . '/?id=' . $user->user_encrypted }}" class="btn btn-danger btn-block"><b>Eliminar Usuario</b></a>
+				        <a href="{{ route( 'book-delete' ) . '/?id=' . $book->user_encrypted }}" class="btn btn-danger btn-block"><b>Eliminar Libro</b></a>
 				    @endif
                 </div>
             </div>
@@ -28,7 +28,7 @@
         <div class="col-md-9">
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="#activity" data-toggle="tab">Libros Prestados</a></li>
+                    <li class="active"><a href="#activity" data-toggle="tab">Prestamos</a></li>
                     <li><a href="#settings" data-toggle="tab">Datos</a></li>
                 </ul>
                 <div class="tab-content">
@@ -52,13 +52,13 @@
 		                	@endfor
 		                @else
 
-		                	<h2 class="text-center">No Ha prestado libros aún</h2>
+		                	<h2 class="text-center">No se ha prestado aún</h2>
 		                @endif
                     </div>
 
                     <div class="tab-pane" id="settings">
 
-                    	@include( "user.section.form_user" )
+                    	@include( "book.section.form_book" )
                     </div>
                 </div>
             </div>

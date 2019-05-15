@@ -47,23 +47,23 @@ class BookController extends Controller
 		}
 		else{
 
-			$data["site_title"] = "Registro de usuarios";
-			$data["menu_user"] = true;
-			$data["rols"] = Rol::where([ "status_id" => 1 ])->Orderby( "rol_name", "asc" )->get();
-			$user = User::where([ 'user.user_encrypted' => $id ])
-									->join( "rol", "user.rol_id", "=", "rol.rol_id" )
-									->Orderby( "user_creationDate", "asc" )
+			$data["site_title"] = "Update de libros";
+			$data["menu_book"] = true;
+			$book = Book::where([ 'book.status_id' => 1 ])
+									->leftJoin( "book_lend", "book.book_id", "=", "book_lend.book_id" )
+									->leftJoin( "status_lend", "book_lend.statusLend_id", "=", "status_lend.statusLend_id" )
+									->where( "book.book_encrypted", $id )
 									->get();
-    		$data["user"] = $user[0];
-    		$data["book_lend"] = Book_Lend::where([ "book_lend.status_id" => 1, "book_lend.user_id" => $user[0]->user_id ])
+    		$data["book"] = $book[0];
+    		$data["book_lend"] = Book_Lend::where([ "book_lend.status_id" => 1, "book_lend.book_id" => $book[0]->book_id ])
     							->join( "book", "book_lend.book_id", "=", "book.book_id" )
     							->get();
 
-    		return view( "user.detail", $data );
+    		return view( "book.detail", $data );
 		}
     }
 
-    #Lista de usuarios registrados
+    #Lista de libros registrados
     public function lista( Request $request ){
 
     	$data["site_title"] = "Lista de libros";
