@@ -22,11 +22,11 @@
             <li class="treeview {{ ( @$menu_book )? 'active' : '' }} {{ ( @$menu_book_open )? 'menu-open' : '' }}">
                 <a href="#"><i class="fa fa-book"></i> <span>Book</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                 <ul class="treeview-menu">
-                    <li>
-                        <a href=""><i class="fa fa-circle-o"></i> Lista de Book</a>
+                    <li class="{{ ( @$menu_book_list )? 'active' : '' }}">
+                        <a href="{{ route( 'book-home' ) }}"><i class="fa fa-circle-o"></i> Lista de Book</a>
                     </li>
-                    <li>
-                        <a href=""><i class="fa fa-circle-o"></i> Prestar Libro</a>
+                    <li class="{{ ( @$menu_book_lend )? 'active' : '' }}">
+                        <a href="{{ route( 'home' ) }}"><i class="fa fa-circle-o"></i> Prestar Libro</a>
                     </li>
                 </ul>
             </li>
