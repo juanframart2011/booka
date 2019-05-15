@@ -1,0 +1,1 @@
+Hola <a href="{{ $url . '/forgot/' . $data['url'] }}" target="_blank">aquí</a> puedes cambiar tu contraseña.
