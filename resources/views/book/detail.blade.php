@@ -17,10 +17,21 @@
                         </li>
                     </ul>
 
+                    @if( $book->statusLend_id == 2 )
+
+                        <a alt="prestar libro" href="{{ route( 'book-lend' ) . '/?id=' . $book->book_encrypted }}" class="btn btn-success btn-block"><b>Prestar Libro</b></a>
+                    @elseif( $book->statusLend_id == 1 && $book_status_lend[0]->user_id == session( "us3r-id" ) )
+
+                        <a alt="Regresar libro" href="{{ route( 'book-lend-update' ) . '/?status=2&id=' . $book_status_lend[0]->bookLend_encrypted }}" class="btn btn-primary btn-block"><b>Regresar Libro</b></a>
+
+                        {{--
+                        <a alt="Extravié libro" href="{{ route( 'book-lend-update' ) . '/?status=3&id=' . $book_status_lend[0]->bookLend_encrypted }}" class="btn btn-warning btn-block"><b>Extravié el Libro</b></a>--}}
+                    @endif
+
                     @if( session( "us3r-rol" ) == 1 )
-				        
-				        <a href="{{ route( 'book-delete' ) . '/?id=' . $book->user_encrypted }}" class="btn btn-danger btn-block"><b>Eliminar Libro</b></a>
-				    @endif
+                        
+                        <a href="{{ route( 'book-delete' ) . '/?id=' . $book->user_encrypted }}" class="btn btn-danger btn-block"><b>Eliminar Libro</b></a>
+                    @endif
                 </div>
             </div>
         </div>
@@ -40,14 +51,16 @@
 
 		                        <div class="post">
 		                            <div class="user-block">
-		                                <img class="img-circle img-bordered-sm" src="{{ asset( 'img/' . $book_lend[$b]->book_media ) }}" alt="{{ $book_lend[$b]->book_name }}">
+		                                <img class="img-circle img-bordered-sm" src="{{ asset( 'img/avatar.png' ) }}" alt="{{ $book_lend[$b]->user_name }}">
 		                                <span class="username">
-		                                <a {{--href="{{ route( 'book', $book_lend[$b]->book_url ) }}"--}}href="#">{{ $book_lend[$b]->book_name }}</a>
+		                                <a href="{{ route( 'user' ) . '/?id=' . $book_lend[$b]->user_encrypted }}">{{ $book_lend[$b]->user_name . ' ' . $book_lend[$b]->user_lastName }}</a>
 		                                </span>
-		                                <span class="description">{{ $book_lend[$b]->book_autor . ' - ' . $book_lend[$b]->book_created }}</span>
+		                                <span class="description">
+                                            Fecha de prestamo: <b>{{ $book_lend[$b]->bookLend_creationDate }}</b> a <b>{{ $book_lend[$b]->bookLend_lastModification }}</b>
+                                        </span>
 		                            </div>
 		                            <!-- /.user-block -->
-		                            <p>{{ $book_lend[$b]->book_description }}</p>
+		                            {{--<p>{{ $book_lend[$b]->statusLend_name }}</p>--}}
 		                        </div>
 		                	@endfor
 		                @else

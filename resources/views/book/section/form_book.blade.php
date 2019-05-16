@@ -24,7 +24,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="name">Nombre(s)</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Nombre(s)" value="{{ ( !empty( $book->book_name )? $book->book_name : old( 'name' ) ) }}" required>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Nombre" value="{{ ( !empty( $book->book_name )? $book->book_name : old( 'name' ) ) }}" required>
                 </div>
             </div>
             <div class="col-md-6">
@@ -40,7 +40,15 @@
             <div class="col-md-5">
                 <div class="form-group">
                     <label for="media">Imagen</label>
-                    <input type="file" class="form-control" id="media" name="media" placeholder="Imagen" required>
+                    @if( !empty( $book->book_media ) )
+
+                        <input type="file" class="form-control" id="media" name="media" placeholder="Imagen">
+                        <br>
+                        <img class="img-book" src="{{ asset( 'img/' . $book->book_media ) }}">
+                    @else
+
+                        <input type="file" class="form-control" id="media" name="media" placeholder="Imagen" required>
+                    @endif
                 </div>
             </div>
 

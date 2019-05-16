@@ -24,10 +24,10 @@
                 <ul class="treeview-menu">
                     <li class="{{ ( @$menu_book_list )? 'active' : '' }}">
                         <a href="{{ route( 'book-home' ) }}"><i class="fa fa-circle-o"></i> Lista de Book</a>
-                    </li>
+                    </li>{{--
                     <li class="{{ ( @$menu_book_lend )? 'active' : '' }}">
                         <a href="{{ route( 'home' ) }}"><i class="fa fa-circle-o"></i> Prestar Libro</a>
-                    </li>
+                    </li>--}}
                 </ul>
             </li>
         </ul>

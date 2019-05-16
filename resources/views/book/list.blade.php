@@ -46,6 +46,7 @@
                                         {{ $books[$u]->book_name }}
                                     </td>
                                     <td>{{ $books[$u]->book_autor }}</td>
+
                                     <td>{{ $books[$u]->statusLend_name }}</td>
 
                                     @if( session( "us3r-rol" ) == 1 )
@@ -58,6 +59,10 @@
 
                                             <a href="{{ route( 'book-delete' ) . '/?id=' . $books[$u]->book_encrypted }}"><i class="fa fa-trash" style="color:red" aria-hidden="true"></i></a>
                                         @endif
+                                        
+                                        @if( $books[$u]->statusLend_id == 2 || empty( $books[$u]->statusLend_id ) )
+                                            <a alt="prestar libro" href="{{ route( 'book-lend' ) . '/?id=' . $books[$u]->book_encrypted }}"><i class="fa fa-check" style="color:green" aria-hidden="true"></i></a>
+                                        @endif
                                     </td>
                                 </tr>
                             @endfor
@@ -65,11 +70,11 @@
                         <tfoot>
                             <tr>
                                 <th>Nombre</th>
-                                <th>Email</th>
-                                <th>Rol</th>
+                                <th>Autor</th>
+                                <th>Estatus</th>
                                 @if( session( "us3r-rol" ) == 1 )
                                 
-                                    <th>Engine version</th>
+                                    <th>Fecha de Creación</th>
                                 @endif
                                 <th>Acciones</th>
                             </tr>
